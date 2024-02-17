@@ -5,6 +5,12 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-console.log('');
+router.get('/products', function(req, res, next) {
+  res.render('products', { title: 'Express' });
+});
+router.get('/loading', function(req, res, next) {
+  res.render('loading', { title: 'Express' });
+});
+console.log('restart done');
 
 module.exports = router;
