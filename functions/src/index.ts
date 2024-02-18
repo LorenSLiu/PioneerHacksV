@@ -5,8 +5,7 @@ import * as echarts from 'echarts';
 
 admin.initializeApp();
 
-// const cors = require('cors')({origin: true});
-//
+
 // function base64ToImage(base64String: any) {
 //     let img = new Image();
 //     img.src = 'data:image/png;base64,' + base64String;
@@ -83,7 +82,9 @@ function makeDataForChart(data: any){
 
 
 export const decodeBarcodeFromImage = functions.https.onRequest(async (request, response) => {
-    //const base64Image = request.body.image;
+    cors(request, response, async () => {
+
+        //const base64Image = request.body.image;
     const number = request.query.number;
     let itemRes = await fetchData(number);
     //let img = await fetchDataPic(number);
@@ -100,6 +101,8 @@ export const decodeBarcodeFromImage = functions.https.onRequest(async (request, 
     }
 
     response.send(resdata)
+    })
+
 
 });
 export const pieChart = functions.https.onRequest((request, response) => {
@@ -161,7 +164,3 @@ export const pieChart = functions.https.onRequest((request, response) => {
 
     })
 });
-
-
-
-

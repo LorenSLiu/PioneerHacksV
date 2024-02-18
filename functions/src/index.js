@@ -38,8 +38,6 @@ const cors = require('cors')({ origin: true });
 const admin = __importStar(require("firebase-admin"));
 const echarts = __importStar(require("echarts"));
 admin.initializeApp();
-// const cors = require('cors')({origin: true});
-//
 // function base64ToImage(base64String: any) {
 //     let img = new Image();
 //     img.src = 'data:image/png;base64,' + base64String;
@@ -112,22 +110,24 @@ function makeDataForChart(data) {
 //     return result;
 // }
 exports.decodeBarcodeFromImage = functions.https.onRequest((request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    //const base64Image = request.body.image;
-    const number = request.query.number;
-    let itemRes = yield fetchData(number);
-    //let img = await fetchDataPic(number);
-    console.log(itemRes);
-    for (let i = 0; i < itemRes.product.ingredients_tags.length; i++) {
-        itemRes.product.ingredients_tags[i] = removeEN(itemRes.product.ingredients_tags[i]);
-    }
-    let resdata = {
-        grade: itemRes.product.nutriscore_data.grade,
-        ecoscore_grade: itemRes.product.ecoscore_grade,
-        ingredients: itemRes.product.ingredients_tags,
-        fucker: itemRes.product.ingredients
-        //img : img
-    };
-    response.send(resdata);
+    cors(request, response, () => __awaiter(void 0, void 0, void 0, function* () {
+        //const base64Image = request.body.image;
+        const number = request.query.number;
+        let itemRes = yield fetchData(number);
+        //let img = await fetchDataPic(number);
+        console.log(itemRes);
+        for (let i = 0; i < itemRes.product.ingredients_tags.length; i++) {
+            itemRes.product.ingredients_tags[i] = removeEN(itemRes.product.ingredients_tags[i]);
+        }
+        let resdata = {
+            grade: itemRes.product.nutriscore_data.grade,
+            ecoscore_grade: itemRes.product.ecoscore_grade,
+            ingredients: itemRes.product.ingredients_tags,
+            fucker: itemRes.product.ingredients
+            //img : img
+        };
+        response.send(resdata);
+    }));
 }));
 exports.pieChart = functions.https.onRequest((request, response) => {
     cors(request, response, () => __awaiter(void 0, void 0, void 0, function* () {

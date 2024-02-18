@@ -2,6 +2,10 @@
   "dependencies": {
     "@zxing/library": "^0.20.0",
     "echarts": "^5.4.3",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "axios": "^1.6.7",
+    "echarts-stat": "^1.2.0",
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^4.3.1"
   }
 }

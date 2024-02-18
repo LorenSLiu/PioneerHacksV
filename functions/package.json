@@ -12,13 +12,13 @@
   "engines": {
     "node": "18"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "dependencies": {
-    "@zxing/library": "^0.20.0",
     "axios": "^1.6.7",
+    "echarts": "5.4.3",
+    "echarts-stat": "^1.2.0",
     "firebase-admin": "^11.8.0",
-    "firebase-functions": "^4.3.1",
-    "sharp": "^0.33.2"
+    "firebase-functions": "^4.3.1"
   },
   "devDependencies": {
     "firebase-functions-test": "^3.1.0",
