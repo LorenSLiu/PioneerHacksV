@@ -54,12 +54,28 @@
         </div>
         <div>
           <h2 id="allergiesText">Add Allergies or Exclude Ingredients</h2>
-          <button class="blacklistButton">Blacklist Ingredients</button>
+          <button class="blacklistButton" onclick="popUp()">Blacklist Ingredients</button>
         </div>
       </div>
       </div>
+    <div id="footer">
     </div>
-    <script>
+    <div id="popup">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h2>Blacklist Ingredients</h2>
+        <p>Exclude ingredients from your search, separate ingredients with commas.</p>
+        <span class="close" onclick="closePopup()">&times;</span>
+      </div>
+      <div class="popup-body">
+        <input type="text">
+        <button>Submit</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
       async function submitForm() {
         const src = await URL.createObjectURL(document.getElementById('fileUpload').files[0]);
         console.log(src)
@@ -69,33 +85,43 @@
             method: 'POST',
             body: await canvas.toDataURL('image/png'),
           });
-        } 
-      };        
+        };
+    }
+
+    function popUp() {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("popup").style.zIndex = "100";
+
+    }
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("popup").style.zIndex = "-100";
+      }
       // async function submitForm() {
       //   const fileInput = document.getElementById('fileUpload');
       //   const img = fileInput.files[0];
-  
+
       //   if (!img) {
       //     console.error('No file selected.');
       //     return;
       //   }
-  
+
       //   const formData = new FormData();
       //   formData.append('image', img);
-  
+
       //   try {
       //     const response = await fetch('/upload', {
       //       method: 'POST',
       //       body: formData
       //     });
-  
+
       //     if (response.ok) {
       //       const data = await response.json();
-  
+
       //       if (data.success) {
       //         const decodedBarcode = data.decodedBarcode;
       //         console.log('Decoded Barcode:', decodedBarcode);
-  
+
       //         // 处理解码结果，例如将其显示在页面上
       //         alert('Decoded Barcode: ' + decodedBarcode);
       //       } else {
@@ -108,9 +134,9 @@
       //     console.error('Error:', error);
       //   }
       // }
-  
-  
-  
+
+
+
     </script>
     </div>
   </body>
