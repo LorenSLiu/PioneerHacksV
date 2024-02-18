@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style2.css" />
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -9,58 +9,36 @@
       #chart-container {
       position: relative;
     }
+    .body{
+      background-color: #A8DA64;
+    }
   </style>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+<title> NutriScan </title>
   </head>
   <body>
+    <div class="safearea">
+      Product Description
+    </div>
     <div class="main">
+
           <div class = "head">
+            <img style="height: 5%; width: 5%; padding-right: 8px;" src="/images/logo.png" alt="">
             <a href= "/"  style="padding-right: 1%; text-decoration:none; color: #2E4312;"> NutriScan > </a>
             <a href = "/products" style="text-decoration: none; color: #2E4312;" > Product</a>
-    </div>
-
-        <div class="main-content">
-          
-          <div id="chart-container">
-            <canvas id="nutritionalChart" width="400" height="400"></canvas>
-            <ul id="legend"></ul>
           </div>
+
+      <div class="main-content">
+        <div id="chartContainer"></div>
         
-      <script>
-        // Sample data for the pie chart
-        var data = {
-          labels: ['Protein', 'Carbohydrates', 'Fat', 'Fiber', 'Others'],
-          datasets: [{
-            data: [20, 40, 30, 10, 5],
-            backgroundColor: ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6'],
-          }],
-        };
-
-        // Configuration options
-        var options = {
-          legend: {
-            display: false,
-          },
-        };
-
-        // Get the context of the canvas element
-        var ctx = document.getElementById('nutritionalChart').getContext('2d');
-
-        // Create the pie chart
-        var myPieChart = new Chart(ctx, {
-          type: 'pie',
-          data: data,
-          options: options
-        });
-
-      </script>
-        
-    </div>
+      
+      </div>
       
     <h1 style="text-align: left; padding-top: 10%; color: #2E4312;">Product Information</h1>
-    <hr style="color: #2E4312;">
+    <hr style="color: black;">
     <p style="font-size: large; display: flex; color: #2E4312;  font-weight: bold; "> NutriScore </p>
-  
-    <div class="stars-container">
+
+  <div class="stars-container">
     <span class="star">★</span>
     <span class="star">★</span>
     <span class="star">★</span>
@@ -68,9 +46,10 @@
     <span class="star">★</span>
   </div>
 
-    <p style="text-align: left; font-size: large; color: #2E4312; font-weight: bold;"> ECO Score </p>
+    
+    <p style="text-align: left; font-size: large; color: #2E4312; "> ECO Score </p>
    
-    <p style="text-align: left; font-size: large; color: #2E4312;  font-weight: bold;"> Ingredients</p>
+    <p style="text-align: left; font-size: large; color: #2E4312; "> Ingredients</p>
 
 
   <!-- RANKING -->
@@ -90,8 +69,41 @@
           }
         });
       }
+
+      
     </script>
   <!-- RANKING -->
+  <script>
+      async function fetchPieChartSVG() {
+      try {
+        const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/pieChart?number=5449000000996');
+        const svgContent = await response.text();
+
+        // Inject the SVG into the chartContainer div
+        document.getElementById('chartContainer').innerHTML = svgContent;
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    }
+
+    fetchPieChartSVG();
+  </script>
+
+  <script>
+
+    async function fetchEcoScoreData() {
+      try {
+        const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/pieChart?number=5449000000996');
+        const svgContent = await response.json();
+
+        // Inject the SVG into the chartContainer div
+        document.getElementById('chartContainer').innerHTML = svgContent;
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    }
+    }
+  </script>
     <div>
   
   </body>

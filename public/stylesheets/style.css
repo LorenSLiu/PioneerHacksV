@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
   font-family: 'Poppins', sans-serif;
 }
@@ -7,12 +8,27 @@ body {
   padding: 0px !important;
   margin: 0px !important;
   background-color: #FFFFFF;
+  scrollbar-width: none;
+
 }
+#body::-webkit-scrollbar {
+  display: none !important;
+}
+
 td {
-  padding-right: 2.5%;
+  padding-left: 15%;
 }
-h1, p {
+h1 {
   margin: 0px !important;
+}
+#title{
+  font-size: 2vh;
+  font-weight: 700;
+  padding: 0px;
+  margin: 0px;
+}
+input[type="file"] {
+  display: none;
 }
 
 .safearea {
@@ -20,59 +36,70 @@ h1, p {
   background-color: white;
   color: black;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2vh;
 }
 .body {
   white-space: pre-line;
   font-family: 'Poppins', sans-serif;
   background-color: #A8DA64;
-  font-size: 2rem;
   height: 100vh;
 }
 .main {
-  width: 90%;
-  padding-left: 5%;
-  padding-right: 5%;
+  width: 96%;
+  padding-left: 2%;
   text-align: center;
 }
 .main-content {
   background-color: #FFFFFF;
   border-radius: 20px;
   box-shadow: 0px 0px 10px 0px #00000022;
-  padding: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 .uploadimage {
   margin-left: 33%;
   border-radius: 15px;
   background-color: #A8DA64;
   width: 33%;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #000000;
+  height: vh;
+  font-weight: 600;
+  padding-left: 4%;
+  padding-right: 4%;
+  
+  color: #2E4312;
+  
+}
+#uploadlabel{
+  line-height: 3vh;
+  padding: 0px;
+  margin: 0px;
+  font-size:2.5vh;
+  font-weight:800;
+
+}
+#mainDescription {
+  padding: 0px;
+  margin: 0px;
+  font-size: 2vh;
+}
+#blacklistHeader{
+  margin-top: 1vh;
+  text-align: left;
+  font-size: 4vh;
+  font-weight: 400;
 }
 
+
 .blacklist {
-  width: 100%;
+  justify-content: flex-end !important;
 }
 .blacklistbutton {
   border-radius: 15px;
   background-color: #778F57;
   min-height: 5rem !important;
-  width: 70%;
+  width: 50%;
   font-size: 2.5rem;
   font-weight: bold;
   color: #FFFFFF;
-}
-
-.star {
-  font-size: 25px;
-  color: white;
-}
-.filled {
-  color: black;
-}
-.stars-container{
-  padding-top: 5px;
-  padding-right: 50%;
-  display: inline-block;
+  position:absolute;
 }
