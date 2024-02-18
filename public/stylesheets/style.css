@@ -1,37 +1,47 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
+* {
   font-family: 'Poppins', sans-serif;
 }
-
-body{
+body {
   padding: 0px !important;
   margin: 0px !important;
-}
-
-#body {
-  white-space: pre-line;
-  font-family: 'Poppins', sans-serif;
-  background-color: #A8DA64;
-  padding-left: 2.5%;
-  font-size: 20px;
+  background-color: #FFFFFF;
 }
 td {
   padding-right: 2.5%;
 }
-h1 {
+h1, p {
   margin: 0px !important;
 }
-.mainbutton {
-  border-radius: 15px;
-  background-color: #A8DA64;
-  min-height: 5rem !important;
-  width: 33%;
+
+.safearea {
+  height: 80px;
+  background-color: white;
+  color: black;
+  text-align: center;
   font-size: 2.5rem;
-  font-weight: bold;
-  color: #000000;
 }
-#uploadImage {
+.body {
+  white-space: pre-line;
+  font-family: 'Poppins', sans-serif;
+  background-color: #A8DA64;
+  font-size: 2rem;
+  height: 100vh;
+}
+.main {
+  width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+}
+.main-content {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 0px #00000022;
+  padding: 5%;
+}
+.uploadimage {
   margin-left: 33%;
   border-radius: 15px;
   background-color: #A8DA64;
@@ -40,28 +50,10 @@ h1 {
   font-weight: bold;
   color: #000000;
 }
-#uploadLabel {
-  margin-bottom: 500px !important;
-}
 input[type="file"] {
   display: none;
 }
-.main {
-  width: 90%;
-  padding-left: 3%;
-  padding-right: 5%;
-  text-align: center;
-}
-.main-content {
-  background-color: #FFFFFF;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px 0px #00000022;
-  padding: 1%;
-}
-.head{
-  display: flex !important;
-  text-align: left;
-}
+
 .blacklist {
   width: 100%;
 }
@@ -75,10 +67,16 @@ input[type="file"] {
   color: #FFFFFF;
 }
 
-#safeArea{
-  height: 80px;
-  background-color: white;
+
+.star {
+  font-size: 25px;
+  color: white;
+}
+.filled {
   color: black;
-  text-align: center;
-  font-size: 2.5rem;
+}
+.stars-container{
+  padding-top: 5px;
+  padding-right: 50%;
+  display: inline-block;
 }
