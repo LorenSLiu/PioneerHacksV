@@ -80,6 +80,7 @@ input[type="file"] {
     padding-left: 4%;
     padding-right: 4%;
     color: #2E4312;
+    height: 5vh;
 }
 
 #scanLabel {
