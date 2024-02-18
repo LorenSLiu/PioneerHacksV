@@ -18,43 +18,43 @@
             <a href = "/products" style="text-decoration: none; color: #2E4312;" > Product</a>
     </div>
 
-      <div class="main-content">
+        <div class="main-content">
+          
+          <div id="chart-container">
+            <canvas id="nutritionalChart" width="400" height="400"></canvas>
+            <ul id="legend"></ul>
+          </div>
         
-        <div id="chart-container">
-          <canvas id="nutritionalChart" width="400" height="400"></canvas>
-          <ul id="legend"></ul>
-        </div>
-      
-    <script>
-      // Sample data for the pie chart
-      var data = {
-        labels: ['Protein', 'Carbohydrates', 'Fat', 'Fiber', 'Others'],
-        datasets: [{
-          data: [20, 40, 30, 10, 5],
-          backgroundColor: ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6'],
-        }],
-      };
-  
-      // Configuration options
-      var options = {
-        legend: {
-          display: false,
-        },
-      };
-  
-      // Get the context of the canvas element
-      var ctx = document.getElementById('nutritionalChart').getContext('2d');
-  
-      // Create the pie chart
-      var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: data,
-        options: options
-      });
-  
-    </script>
-      
-      </div>
+      <script>
+        // Sample data for the pie chart
+        var data = {
+          labels: ['Protein', 'Carbohydrates', 'Fat', 'Fiber', 'Others'],
+          datasets: [{
+            data: [20, 40, 30, 10, 5],
+            backgroundColor: ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6'],
+          }],
+        };
+
+        // Configuration options
+        var options = {
+          legend: {
+            display: false,
+          },
+        };
+
+        // Get the context of the canvas element
+        var ctx = document.getElementById('nutritionalChart').getContext('2d');
+
+        // Create the pie chart
+        var myPieChart = new Chart(ctx, {
+          type: 'pie',
+          data: data,
+          options: options
+        });
+
+      </script>
+        
+    </div>
       
     <h1 style="text-align: left; padding-top: 10%; color: #2E4312;">Product Information</h1>
     <hr style="color: #2E4312;">
@@ -68,7 +68,6 @@
     <span class="star">★</span>
   </div>
 
-    
     <p style="text-align: left; font-size: large; color: #2E4312; font-weight: bold;"> ECO Score </p>
    
     <p style="text-align: left; font-size: large; color: #2E4312;  font-weight: bold;"> Ingredients</p>
@@ -93,9 +92,6 @@
       }
     </script>
   <!-- RANKING -->
-
-
-
     <div>
   
   </body>
