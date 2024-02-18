@@ -27,7 +27,7 @@ h1 {
 }
 
 #title {
-    font-size: 2vh;
+    font-size: 5vw;
     font-weight: 700;
     padding:0;
     margin: 0 0 10%;
@@ -50,7 +50,7 @@ input[type="file"] {
     font-family: 'Poppins', sans-serif;
     background-color: #A8DA64;
     height: 75vh;
-    border-radius: 40px !important;
+    border-radius: 50px !important;
     box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.11);
 }
 
@@ -62,14 +62,14 @@ input[type="file"] {
 
 .main-content {
     background-color: #FFFFFF;
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: 0 0 7px 0 #00000030;
     padding: 1vh 5% 1vh 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 1.3vh;
-    margin-top: -29px;
+    row-gap: 2vh;
+    /*margin-top: -29px;*/
 }
 
 .scanText {
@@ -83,25 +83,27 @@ input[type="file"] {
 
 }
 
-#uploadLabel {
-    line-height: 3vh;
+#scanLabel {
+    line-height: 5vw;
     padding:0;
     margin:0;
-    font-size: 2.5vh;
+    font-size: 4vw;
     font-weight: 800;
+
 
 }
 
 #mainDescription {
     padding:0;
     margin:0;
-    font-size: 2vh;
+    font-size: 4vw;
+    font-weight: 300;
 }
 
 #blacklistHeader {
-    margin-top: 1vh;
     text-align: left;
-    font-size: 4vh;
+    margin: 1vh -1vh -2vw 5vw !important;
+    font-size: 8vw;
     font-weight: 400;
 }
 
@@ -117,7 +119,7 @@ input[type="file"] {
     height: 3.5vh;
     border: none;
     width: 60%;
-    font-size: 1.6vh;
+    font-size: 3.2vw;
     font-weight: 400;
     color: #FFFFFF;
     align-self: flex-end;
@@ -132,10 +134,11 @@ input[type="file"] {
 }
 
 #allergiesText {
-    font-size: 1.8vh;
+    font-size: 3.6vw;
     font-weight: 500;
     margin: 0 0 0 20px;
     text-align: center;
+
 }
 
 #footer{
@@ -150,9 +153,9 @@ input[type="file"] {
 #footer-bar{
     background-color:white;
     width: 80%;
-    margin-left: 10%;
     height: 10vh;
-    margin-top: 20vh;
     border-radius: 20px;
+    bottom: 11vh;
+    position: absolute;
 
 }
