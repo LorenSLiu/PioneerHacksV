@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@zxing/library": "^0.20.0",
+    "echarts": "^5.4.3",
+    "sharp": "^0.33.2"
+  }
+}
