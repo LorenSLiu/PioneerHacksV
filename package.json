@@ -1,11 +1,27 @@
 {
+
+
+
+  "name": "pioneerhacksv",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "@zxing/library": "^0.20.0",
-    "echarts": "^5.4.3",
-    "sharp": "^0.33.2",
     "axios": "^1.6.7",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.4",
     "echarts-stat": "^1.2.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "nodemon": "^3.0.3",
+    "echarts": "^5.4.3",
     "firebase-admin": "^11.8.0",
-    "firebase-functions": "^4.3.1"
+    "firebase-functions": "^4.3.1
   }
 }

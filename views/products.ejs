@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+      #chart-container {
+      position: relative;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="main">
+          <div class = "head">
+            <a href= "/"  style="padding-right: 1%; text-decoration:none; color: #2E4312;"> NutriScan > </a>
+            <a href = "/products" style="text-decoration: none; color: #2E4312;" > Product</a>
+    </div>
+
+      <div class="main-content">
+        
+        <div id="chart-container">
+          <canvas id="nutritionalChart" width="400" height="400"></canvas>
+          <ul id="legend"></ul>
+        </div>
+      
+    <script>
+      // Sample data for the pie chart
+      var data = {
+        labels: ['Protein', 'Carbohydrates', 'Fat', 'Fiber', 'Others'],
+        datasets: [{
+          data: [20, 40, 30, 10, 5],
+          backgroundColor: ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6'],
+        }],
+      };
+  
+      // Configuration options
+      var options = {
+        legend: {
+          display: false,
+        },
+      };
+  
+      // Get the context of the canvas element
+      var ctx = document.getElementById('nutritionalChart').getContext('2d');
+  
+      // Create the pie chart
+      var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: options
+      });
+  
+    </script>
+      
+      </div>
+      
+    <h1 style="text-align: left; padding-top: 10%; color: #2E4312;">Product Information</h1>
+    <hr style="color: #2E4312;">
+    <p style="font-size: large; display: flex; color: #2E4312;  font-weight: bold; "> NutriScore </p>
+  
+    <div class="stars-container">
+    <span class="star">★</span>
+    <span class="star">★</span>
+    <span class="star">★</span>
+    <span class="star">★</span>
+    <span class="star">★</span>
+  </div>
+
+    
+    <p style="text-align: left; font-size: large; color: #2E4312; font-weight: bold;"> ECO Score </p>
+   
+    <p style="text-align: left; font-size: large; color: #2E4312;  font-weight: bold;"> Ingredients</p>
+
+
+  <!-- RANKING -->
+    <script>
+      var currentRating = 4; // Set the predefined rating
+  
+      // Initial update of stars based on the predefined rating
+      updateStars();
+  
+      function updateStars() {
+        var stars = document.querySelectorAll('.star');
+        stars.forEach(function(star, index) {
+          if (index < currentRating) {
+            star.classList.add('filled');
+          } else {
+            star.classList.remove('filled');
+          }
+        });
+      }
+    </script>
+  <!-- RANKING -->
+
+
+
+    <div>
+  
+  </body>
+</html>
