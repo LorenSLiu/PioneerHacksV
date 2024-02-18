@@ -24,7 +24,7 @@ h1 {
   height: 100vh;
 }
 
-.uploadimage {
+.scanText {
   margin-left: 33%;
   border-radius: 15px;
   background-color: #A8DA64;
@@ -37,13 +37,18 @@ input[type="file"] {
   display: none;
 }
 
-.safearea {
-  height: 40px;
+.safeArea {
+  /* height: 40px;
   background-color: white;
   color: #2E4312;
   padding-top: 4%;
   text-align: center;
-  font-size: medium;
+  font-size: medium; */
+  height: 3.4vh;
+  background-color: white;
+  color: black;
+  text-align: center;
+
 }
 .main {
   width: 90%;
@@ -69,7 +74,7 @@ input[type="file"] {
 .blacklist {
   width: 100%;
 }
-.blacklistbutton {
+.blacklistButton {
   border-radius: 15px;
   background-color: #778F57;
   min-height: 5rem !important;
@@ -91,4 +96,11 @@ input[type="file"] {
   padding-top: 5px;
   padding-right: 50%;
   display: inline-block;
+}
+
+.banner{
+  background-color: #778F57;
+  border-color: #778F57;
+  flood-color: #778F57;
+  opacity: 80%;
 }
