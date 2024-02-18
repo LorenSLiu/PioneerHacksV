@@ -23,8 +23,8 @@ router.get('/products', async function(req, res, next) {
 // });
 // set a post route to handle the form submission
 router.post('/upload', function(req, res, next) {
-  console.log(req.body.image);
-  res.end("asdfasdfasdfasdfasd")
+  console.log(req.body);
+  res.render('loading');
 });
 console.log('restart done');
 
