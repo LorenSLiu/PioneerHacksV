@@ -69,7 +69,7 @@ input[type="file"] {
     flex-direction: column;
     align-items: center;
     row-gap: 1.3vh;
-    margin-top: 1vh;
+    margin-top: -29px;
 }
 
 .scanText {
@@ -146,4 +146,13 @@ input[type="file"] {
     bottom: 0;
     width: 100vw;
     z-index: -1;
+}
+#footer-bar{
+    background-color:white;
+    width: 80%;
+    margin-left: 10%;
+    height: 10vh;
+    margin-top: 20vh;
+    border-radius: 20px;
+
 }
