@@ -32,11 +32,12 @@
           </svg>
           <h1 id="title">Welcome to NutriScan</h1>
           <p id="mainDescription">Get detailed nutrition facts with just a click of a button. Explore awide range of products and make informed choices for a healthier lifestyle. Upload an image.</p>
-          <form action="/upload" method="POST">
+          <form action="/upload" method="POST" id="form">
             <div class="scanText">
               <label for="fileUpload" id="scanLabel">Scan Now</label>
-              <canvas id="canvas" width="100%" height="100%" style="display: none;"></canvas>
-              <input type="file" id="fileUpload" accept="image/*" capture="camera" name="image" onchange="submitForm()">
+              <input type="file" id="fileUpload" accept="image/jpeg" capture="camera" name="image" onchange="submitForm()">
+              <label for="b64" style="display: none;"></label>
+              <input type="text" id="b64" name="b64" style="display: none;">
             </div>
           </form>
         </div>
@@ -75,18 +76,17 @@
     </div>
 
   <script>
-      async function submitForm() {
-        const src = await URL.createObjectURL(document.getElementById('fileUpload').files[0]);
-        console.log(src)
-        const canvas = document.getElementById('canvas');
-        new Image(src).onload = async function() {
-          await fetch('/upload', {
-            method: 'POST',
-            body: await canvas.toDataURL('image/png'),
-          });
-        };
-    }
-
+    async function submitForm() {
+      event.preventDefault();
+      var reader = new FileReader();
+      var base64data;
+      reader.readAsDataURL(document.getElementById('fileUpload').files[0]);
+      reader.onloadend = function() {
+        document.getElementById("b64").value = reader.result;
+        console.log(document.getElementById("b64").value)
+      }
+      document.getElementById("form").submit();
+    };
     function popUp() {
         document.getElementById("popup").style.display = "block";
         document.getElementById("popup").style.zIndex = "100";
