@@ -35,7 +35,7 @@
         <form action="/upload" method="POST">
           <div class="uploadimage">
             <label for="fileUpload" id="uploadlabel">Scan Now</label>
-            <input type="file" id="fileUpload" accept="image/*" capture="camera" onchange="(event) => event.prevthis.form.submit();">
+            <input type="file" id="fileUpload" accept="image/png, image/heic, image/jpeg" capture="camera" name="image" onchange="submitForm()">
           </div>
         </form>
       </div>
@@ -60,23 +60,14 @@
   </div>
   <script>
     
-    // function submitForm() {
-    //   console.log('submitForm');
-    //   let img = document.getElementById('fileUpload').files[0];
-    //   console.log(img);
-    //   fetch('/upload', {
-    //       method: 'POST',
-    //       body: JSON.stringify({ image: img })
-    //     }).then(response => response.json())
-    //       .then(data => {
-    //         console.log('Success:', data);
-    //         window.location.href = '/pro';
-    //       })
-    //       .catch((error) => {
-    //         console.error('Error:', error);
-    //       });
-      
-    // }
+    async function submitForm() {
+      const form = document.getElementById("fileUpload");
+      console.log(form.value)
+      await fetch('/upload', {
+        method: 'POST',
+        body: form,
+      });
+    }
     // async function submitForm() {
     //   const fileInput = document.getElementById('fileUpload');
     //   const img = fileInput.files[0];

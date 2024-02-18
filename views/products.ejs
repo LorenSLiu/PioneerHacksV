@@ -29,7 +29,7 @@
           </div>
 
       <div class="main-content">
-        <div id="chartContainer"></div>
+        <div id="chartContainer" style="align-self: center;"></div>
         
       
       </div>
@@ -48,6 +48,7 @@
 
     
     <p style="text-align: left; font-size: large; color: #2E4312; "> ECO Score </p>
+    <div id="ecoScoreContainer"></div>
    
     <p style="text-align: left; font-size: large; color: #2E4312; "> Ingredients</p>
 
@@ -89,21 +90,36 @@
     fetchPieChartSVG();
   </script>
 
-  <script>
+<script>
+  async function fetchEcoScoreData() {
+    try {
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/bimbimbombomSUKAAA?number=5449000000996');
+      const ecoScoreData = await response.json();
 
-    async function fetchEcoScoreData() {
-      try {
-        const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/pieChart?number=5449000000996');
-        const svgContent = await response.json();
+      // Extract the ecoscore_grade property
+      const ecoscoreGrade = ecoScoreData.ecoscore_grade;
 
-        // Inject the SVG into the chartContainer div
-        document.getElementById('chartContainer').innerHTML = svgContent;
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
+      // Display the ecoscore_grade in a specific container
+      const ecoScoreContainer = document.getElementById('ecoScoreContainer');
+      console.log("data", ecoscoreGrade);
+
+      if (ecoscoreGrade === "not-applicable") {
+        ecoScoreContainer.innerHTML = "<p>Eco Score is not applicable for this product.</p>";
+      } else {
+        ecoScoreContainer.innerHTML = `<p>Eco Score Grade: ${ecoscoreGrade}</p>`;
       }
+
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
     }
-    }
-  </script>
+  }
+
+  // Call the fetchEcoScoreData function when the document is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchEcoScoreData();
+  });
+</script>
+
     <div>
   
   </body>
