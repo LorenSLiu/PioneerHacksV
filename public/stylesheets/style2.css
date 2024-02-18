@@ -24,7 +24,7 @@ h1 {
   height: 100vh;
 }
 
-.uploadimage {
+.scanText {
   margin-left: 33%;
   border-radius: 15px;
   background-color: #A8DA64;
@@ -37,7 +37,7 @@ input[type="file"] {
   display: none;
 }
 
-.safearea {
+.safeArea {
   height: 40px;
   background-color: white;
   color: #2E4312;
@@ -69,7 +69,7 @@ input[type="file"] {
 .blacklist {
   width: 100%;
 }
-.blacklistbutton {
+.blacklistButton {
   border-radius: 15px;
   background-color: #778F57;
   min-height: 5rem !important;
