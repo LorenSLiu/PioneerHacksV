@@ -61,19 +61,18 @@
     <div id="footer">
     </div>
     <div id="popup">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h2>Blacklist Ingredients</h2>
-        <p>Exclude ingredients from your search, separate ingredients with commas.</p>
-        <span class="close" onclick="closePopup()">&times;</span>
-      </div>
-      <div class="popup-body">
-        <input type="text">
-        <button>Submit</button>
+      <div id="popup-content">
+        <div id="popup-header">
+          <span id="close" onclick="closePopup()">&times;</span>
+          <h2 id="popupTitle">Blacklist Ingredients</h2>
+          <p id ="popupDescription">Exclude ingredients from your search, separate ingredients with commas.</p>
+        </div>
+        <div class="popup-body">
+          <input id ="popupInput" type="text">
+          <span id="popupSubmit">→</span>
+        </div>
       </div>
     </div>
-
-  </div>
 
   <script>
       async function submitForm() {
@@ -91,12 +90,11 @@
     function popUp() {
         document.getElementById("popup").style.display = "block";
         document.getElementById("popup").style.zIndex = "100";
-
     }
     function closePopup() {
         document.getElementById("popup").style.display = "none";
         document.getElementById("popup").style.zIndex = "-100";
-      }
+    }
       // async function submitForm() {
       //   const fileInput = document.getElementById('fileUpload');
       //   const img = fileInput.files[0];
