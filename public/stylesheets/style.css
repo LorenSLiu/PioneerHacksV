@@ -142,7 +142,7 @@ input[type="file"] {
 
 #footer{
     background-color: #7FA24D;
-    height: 27vh;
+    height: 100vh;
     display: flex;
     position: absolute;
     bottom: 0;

@@ -32,13 +32,13 @@
           </svg>
           <h1 id="title">Welcome to NutriScan</h1>
           <p id="mainDescription">Get detailed nutrition facts with just a click of a button. Explore awide range of products and make informed choices for a healthier lifestyle. Upload an image.</p>
-          <form action="/upload" method="POST" id="form">
+          <form id="form">
             <div class="scanText">
               <label for="fileUpload" id="scanLabel">Scan Now</label>
-              <input type="file" id="fileUpload" accept="image/jpeg" capture="camera" name="image" onchange="submitForm()">
-              <label for="b64" style="display: none;"></label>
-              <input type="text" id="b64" name="b64" style="display: none;">
+              <input type="file" id="fileUpload" accept="image/png" capture="camera" name="image" onchange="submitForm()">
             </div>
+            <canvas id="canvas" width="100%" height="100%"></canvas>
+            <input type="text" id="b64" name="b64" style="display: none;">
           </form>
         </div>
         <h1 id="blacklistHeader">Food Restrictions?</h1>
@@ -69,32 +69,55 @@
           <p id ="popupDescription">Exclude ingredients from your search, separate ingredients with commas.</p>
         </div>
         <div class="popup-body">
-          <input id ="popupInput" type="text">
-          <span id="popupSubmit">→</span>
+          <input id="popupInput" type="text">
+          <span id="popupSubmit" onclick="submitPopup()" style="width: 10px; height: 5px;">→</span>
         </div>
       </div>
     </div>
-
+    <div>
+    <p style="color: white; font-size: xx-large; margin-left: 5%;">Help Center </p> 
+    <p style="color: white; font-size: x-large; margin-left: 10%;">FAQs</p>
+    <p style="color: white; font-size: x-large; margin-left: 10%;">Privacy Policy</p>
+    
+    <!-- <p style="color: white; font-size: x-large; margin-left: 50%; display: inline; apadding-bottom: 100%;">Contact Us</p> -->
+    <div>
   <script>
     async function submitForm() {
       event.preventDefault();
+      var src = new Blob([URL.createObjectURL(document.getElementById('fileUpload').files[0])]);
       var reader = new FileReader();
-      var base64data;
-      reader.readAsDataURL(document.getElementById('fileUpload').files[0]);
+      reader.readAsDataURL(src); 
       reader.onloadend = function() {
-        document.getElementById("b64").value = reader.result;
-        console.log(document.getElementById("b64").value)
+        var base64data = reader.result;                
+        console.log(base64data);
+        document.getElementById("b64").value = base64data;
+        console.log(document.getElementById("b64").value);
+        fetch('/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({image: base64data}),
+      })
       }
-      document.getElementById("form").submit();
     };
     function popUp() {
         document.getElementById("popup").style.display = "block";
         document.getElementById("popup").style.zIndex = "100";
     }
     function closePopup() {
+      
         document.getElementById("popup").style.display = "none";
         document.getElementById("popup").style.zIndex = "-100";
     }
+    
+    function submitPopup() {
+      var blacklist = document.getElementById("popupInput").value;
+      console.log(blacklist);
+      document.cookie = "blacklist=" + blacklist;
+      closePopup();
+    }
+
       // async function submitForm() {
       //   const fileInput = document.getElementById('fileUpload');
       //   const img = fileInput.files[0];
@@ -133,9 +156,14 @@
       //   }
       // }
 
-
-
-    </script>
+      function submitPopup() {
+          // Get the value from the input field
+          var inputValue = document.getElementById("popupInput").value;
+          
+          // Log the value to the console (you can replace this with your desired action)
+          console.log('Input value:', inputValue);
+      }
+  </script>
     </div>
   </body>
 </html>
