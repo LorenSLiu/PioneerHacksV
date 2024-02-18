@@ -60,4 +60,22 @@ router.get('/loading', async function(req, res, next) {
 
 
 
+router.post('/barcodePost', function(req, res, next) {
+
+  const barcode= req.body['barcode'];
+  console.log(barcode);
+  try {
+    fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=' + barcode)
+        .then(response => response.json()).then(data => {
+      console.log(data);
+      return data;
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error processing image');
+    return 404;
+
+  }
+});
+
 module.exports = router;
