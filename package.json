@@ -22,6 +22,6 @@
     "nodemon": "^3.0.3",
     "echarts": "^5.4.3",
     "firebase-admin": "^11.8.0",
-    "firebase-functions": "^4.3.1
+    "firebase-functions": "^4.3.1"
   }
 }
