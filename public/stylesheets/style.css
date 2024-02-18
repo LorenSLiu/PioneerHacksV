@@ -9,8 +9,7 @@ body {
     margin:0 !important;
     background-color: #FFFFFF;
     scrollbar-width: none;
-
-
+    height: 105vh;
 }
 
 body::-webkit-scrollbar {

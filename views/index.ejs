@@ -37,6 +37,7 @@
               <label for="fileUpload" id="scanLabel">Scan Now</label>
               <input type="file" id="fileUpload" accept="image/png" capture="camera" name="image" onchange="submitForm()">
             </div>
+            
             <canvas id="canvas" width="100%" height="100%"></canvas>
             <input type="text" id="b64" name="b64" style="display: none;">
           </form>
@@ -59,6 +60,10 @@
         </div>
       </div>
       </div>
+      <p style="color: white; font-size: x-large; margin-left: 10%;">Help Center </p> 
+    <p style="color: white; font-size: x-large; margin-left: 10%;">FAQs</p>
+    <p style="color: white; font-size: x-large; margin-left: 10%;">Privacy Policy</p>
+    
     <div id="footer">
     </div>
     <div id="popup">
@@ -75,32 +80,28 @@
       </div>
     </div>
     <div>
-    <p style="color: white; font-size: xx-large; margin-left: 5%;">Help Center </p> 
-    <p style="color: white; font-size: x-large; margin-left: 10%;">FAQs</p>
-    <p style="color: white; font-size: x-large; margin-left: 10%;">Privacy Policy</p>
-    
     <!-- <p style="color: white; font-size: x-large; margin-left: 50%; display: inline; apadding-bottom: 100%;">Contact Us</p> -->
     <div>
   <script>
     async function submitForm() {
-      event.preventDefault();
-      var src = new Blob([URL.createObjectURL(document.getElementById('fileUpload').files[0])]);
-      var reader = new FileReader();
-      reader.readAsDataURL(src); 
-      reader.onloadend = function() {
-        var base64data = reader.result;                
-        console.log(base64data);
-        document.getElementById("b64").value = base64data;
-        console.log(document.getElementById("b64").value);
-        fetch('/upload', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({image: base64data}),
-      })
+      // event.preventDefault();
+      // var src = new Blob([URL.createObjectURL(document.getElementById('fileUpload').files[0])]);
+      // var reader = new FileReader();
+      // reader.readAsDataURL(src); 
+      // reader.onloadend = function() {
+      //   var base64data = reader.result;                
+      //   console.log(base64data);
+      //   document.getElementById("b64").value = base64data;
+      // //   console.log(document.getElementById("b64").value);
+      //   fetch('/upload', {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+        // body: JSON.stringify({image: base64data}),
+      // })
+      window.location.href = '/loading';
       }
-    };
     function popUp() {
         document.getElementById("popup").style.display = "block";
         document.getElementById("popup").style.zIndex = "100";
@@ -111,12 +112,12 @@
         document.getElementById("popup").style.zIndex = "-100";
     }
     
-    function submitPopup() {
-      var blacklist = document.getElementById("popupInput").value;
-      console.log(blacklist);
-      document.cookie = "blacklist=" + blacklist;
-      closePopup();
-    }
+    // function submitPopup() {
+    //   var blacklist = document.getElementById("popupInput").value;
+    //   console.log(blacklist);
+    //   document.cookie = "blacklist=" + blacklist;
+    //   closePopup();
+    // }
 
       // async function submitForm() {
       //   const fileInput = document.getElementById('fileUpload');
@@ -157,12 +158,31 @@
       // }
 
       function submitPopup() {
-          // Get the value from the input field
-          var inputValue = document.getElementById("popupInput").value;
-          
-          // Log the value to the console (you can replace this with your desired action)
-          console.log('Input value:', inputValue);
-      }
+        // Get the value from the input field
+        var inputValue = document.getElementById("popupInput").value;
+
+        // Create an object with the data you want to send to the server
+        var data = {
+        inputValue: inputValue
+        };
+
+        // Make a POST request to your server with the data
+        fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/SendData', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+        },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+        // Handle the response from the server (you can replace this with your desired action)
+        console.log('Server response:', result);
+        })
+        .catch(error => {
+        console.error('Error submitting data:', error);
+        });
+        }z
   </script>
     </div>
   </body>

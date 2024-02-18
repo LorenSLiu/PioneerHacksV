@@ -58,19 +58,6 @@ router.get('/loading', async function(req, res, next) {
 // });
 // console.log('restart done');
 
-router.post('/upload', function(req, res, next) {
-  try {
-    // Your image processing code here
 
-    // Simulate processing delay (you can remove this in production)
-    setTimeout(() => {
-      // Redirect to the /products page after processing the image
-      res.redirect('/loading');
-    }, 2000); // Simulated delay of 2 seconds
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Error processing image');
-  }
-});
 
 module.exports = router;

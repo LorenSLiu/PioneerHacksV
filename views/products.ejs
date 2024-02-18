@@ -105,7 +105,7 @@
 <script>
   async function fetchEcoScoreData() {
     try {
-      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/decodeBarcodeFromImage?number=051500241639');
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=051500241639');
       const ecoScoreData = await response.json();
 
       // Extract the ecoscore_grade property
@@ -135,7 +135,7 @@
 <script>
   async function fetchIngredients() {
     try {
-      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/decodeBarcodeFromImage?number=051500241639');
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=051500241639');
       const ingredientsData = await response.json();
 
       // Extract the ingredients property
@@ -165,7 +165,7 @@
 <script>
   async function fetchGrade() {
     try {
-      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/decodeBarcodeFromImage?number=051500241639');
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=051500241639');
       const gradeData = await response.json();
 
       // Extract the grade property
@@ -190,6 +190,33 @@
   document.addEventListener('DOMContentLoaded', () => {
     fetchGrade();
   });
+
+  async function fetchDataFromServer() {
+    // Make a GET request to your server
+
+    try {
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/GetData');
+      const allergyData = await response.json();
+
+      const allergy = allergyData._id;
+      // Extract the ecoscore_grade property
+
+      // Display the ecoscore_grade in a specific container
+      const allergyContainer = document.getElementById('allergyContainer');
+      console.log("urmom", allergy);
+
+      if (allergy === "not-applicable") {
+        allergyContainer.innerHTML = "<li>Not applicable</li>";
+      } else {
+        allergyContainer.innerHTML = `<li> Score: ${allergy.toUpperCase()}</li>`;
+      }
+
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  
+}
+
 </script>
 
     <div>
