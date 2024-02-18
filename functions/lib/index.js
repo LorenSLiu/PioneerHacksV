@@ -22,18 +22,178 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pieChart = exports.decodeBarcodeFromImage = void 0;
+exports.GetData = exports.SendData = exports.pieChart = exports.getasdf = exports.getIngredients = void 0;
 const functions = __importStar(require("firebase-functions"));
 const cors = require('cors')({ origin: true });
 const admin = __importStar(require("firebase-admin"));
 const echarts = __importStar(require("echarts"));
+const axios_1 = __importDefault(require("axios"));
 admin.initializeApp();
-// function base64ToImage(base64String: any) {
-//     let img = new Image();
-//     img.src = 'data:image/png;base64,' + base64String;
-//     return img;
-// }
+exports.getIngredients = functions.https.onRequest(async (request, response) => {
+    cors(request, response, async () => {
+        const number = request.query.number;
+        let itemRes = await fetchData(number);
+        //let img = await fetchDataPic(number);
+        console.log(itemRes);
+        for (let i = 0; i < itemRes.product.ingredients_tags.length; i++) {
+            itemRes.product.ingredients_tags[i] = removeEN(itemRes.product.ingredients_tags[i]);
+        }
+        let resdata = {
+            grade: itemRes.product.nutriscore_data.grade,
+            ecoscore_grade: itemRes.product.ecoscore_grade,
+            ingredients: itemRes.product.ingredients_tags,
+            //img : img
+        };
+        response.send(resdata);
+    });
+});
+exports.getasdf = functions.https.onRequest(async (request, response) => {
+    cors(request, response, async () => {
+        const number = request.query.number;
+        let itemRes = await fetchData(number);
+        //let img = await fetchDataPic(number);
+        console.log(itemRes);
+        for (let i = 0; i < itemRes.product.ingredients_tags.length; i++) {
+            itemRes.product.ingredients_tags[i] = removeEN(itemRes.product.ingredients_tags[i]);
+        }
+        let resdata = {
+            grade: itemRes.product.nutriscore_data.grade,
+            ecoscore_grade: itemRes.product.ecoscore_grade,
+            ingredients: itemRes.product.ingredients_tags,
+            //categories_tags: removeEN(itemRes.product.categories_tags[0])
+            //img : img
+        };
+        response.send(resdata);
+    });
+});
+exports.pieChart = functions.https.onRequest((request, response) => {
+    cors(request, response, async () => {
+        const number = request.query.number;
+        let itemResult = await fetchData(number);
+        console.log(itemResult);
+        for (let i = 0; i < itemResult.product.ingredients_tags.length; i++) {
+            itemResult.product.ingredients_tags[i] = removeEN(itemResult.product.ingredients_tags[i]);
+        }
+        console.log(typeof itemResult.product.ingredients[0]);
+        let data = makeDataForChart(itemResult.product.ingredients);
+        const option = {
+            // title: {
+            //     text: 'nutrient content',
+            //     subtext: 'Hey',
+            //     left: 'right'
+            // },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                right: 'right'
+            },
+            series: [
+                {
+                    name: 'Access From',
+                    type: 'pie',
+                    radius: '50%',
+                    data: data
+                }
+            ]
+        };
+        const chart = echarts.init(null, null, {
+            renderer: 'svg',
+            ssr: true,
+            width: 450,
+            height: 450
+        });
+        chart.setOption(option);
+        const svgStr = chart.renderToSVGString();
+        response.send(svgStr);
+    });
+});
+exports.SendData = functions.https.onRequest((request, response) => {
+    cors(request, response, () => {
+        const postData = request.body;
+        if (typeof postData !== 'object' || postData === null) {
+            response.status(400).send("bruh it's not an object, i can't take it");
+            return;
+        }
+        //response.set('Access-Control-Allow-Origin', '*');
+        console.log('get query collection', postData);
+        const data = {
+            "collection": "KeyFieldDB",
+            "database": "finalProductionDB",
+            "dataSource": "pioneer",
+            "document": postData
+        };
+        const config = {
+            method: 'post',
+            url: 'https://us-west-2.aws.data.mongodb-api.com/app/data-ekdhi/endpoint/data/v1/action/insertOne',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Request-Headers': '*',
+                'api-key': 'D9lE6zzkrBns3pihzoYb8XX8H4qCuKJmy7FfEYrmlZcbBGVl3JysrbN20clAw2wu',
+                'Accept': 'application/json'
+            },
+            data: JSON.stringify(data)
+        };
+        (0, axios_1.default)(config)
+            .then(function (dataResponse) {
+            console.log("data insert response", JSON.stringify(dataResponse.data));
+            response.send(JSON.stringify(dataResponse.data));
+        })
+            .catch(function (error) {
+            let errorRes = {
+                message: error.message,
+                code: error.code,
+                status: error.status
+            };
+            response.status(500).send(errorRes);
+        });
+    });
+});
+exports.GetData = functions.https.onRequest((request, response) => {
+    cors(request, response, () => {
+        const inputValue = request.query.team_number;
+        //const HeaderDatabase = request.query.Database;
+        console.log("team_number|tag", JSON.stringify(inputValue));
+        const data = JSON.stringify({
+            "collection": "KeyFieldDB",
+            "database": "finalProductionDB",
+            "dataSource": "pioneer",
+            // "filter": {
+            //     "inputValue": inputValue
+            // }
+        });
+        console.log("dataa|tag", JSON.stringify(data));
+        const config = {
+            method: 'post',
+            url: 'https://us-west-2.aws.data.mongodb-api.com/app/data-ekdhi/endpoint/data/v1/action/find',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Request-Headers': '*',
+                'api-key': 'D9lE6zzkrBns3pihzoYb8XX8H4qCuKJmy7FfEYrmlZcbBGVl3JysrbN20clAw2wu',
+                'Accept': 'application/json'
+            },
+            data: data
+        };
+        (0, axios_1.default)(config)
+            .then(function (dataResponse) {
+            console.log(JSON.stringify(dataResponse.data));
+            response.send(JSON.stringify(dataResponse.data));
+        })
+            .catch(function (error) {
+            let errorRes = {
+                message: error.message,
+                code: error.code,
+                status: error.status
+            };
+            response.status(500).send(errorRes);
+        });
+    });
+});
 async function fetchData(barCode) {
     console.log("begin fetchdata");
     try {
@@ -98,73 +258,4 @@ function makeDataForChart(data) {
 //     console.log("huh")
 //     return result;
 // }
-exports.decodeBarcodeFromImage = functions.https.onRequest(async (request, response) => {
-    cors(request, response, async () => {
-        //const base64Image = request.body.image;
-        const number = request.query.number;
-        let itemRes = await fetchData(number);
-        //let img = await fetchDataPic(number);
-        console.log(itemRes);
-        for (let i = 0; i < itemRes.product.ingredients_tags.length; i++) {
-            itemRes.product.ingredients_tags[i] = removeEN(itemRes.product.ingredients_tags[i]);
-        }
-        let resdata = {
-            grade: itemRes.product.nutriscore_data.grade,
-            ecoscore_grade: itemRes.product.ecoscore_grade,
-            ingredients: itemRes.product.ingredients_tags,
-            fucker: itemRes.product.ingredients
-            //img : img
-        };
-        response.send(resdata);
-    });
-});
-exports.pieChart = functions.https.onRequest((request, response) => {
-    cors(request, response, async () => {
-        const number = request.query.number;
-        let itemResult = await fetchData(number);
-        //let img = await fetchDataPic(number);
-        console.log(itemResult);
-        //
-        // let itemResult = {
-        //     itemResult.product.ingredients_tags: itemResult.product.ingredients_tags,
-        //
-        // }
-        for (let i = 0; i < itemResult.product.ingredients_tags.length; i++) {
-            itemResult.product.ingredients_tags[i] = removeEN(itemResult.product.ingredients_tags[i]);
-        }
-        console.log(typeof itemResult.product.ingredients[0]);
-        let data = makeDataForChart(itemResult.product.ingredients);
-        const option = {
-            // title: {
-            //     text: 'nutrient content',
-            //     subtext: 'Hey',
-            //     left: 'right'
-            // },
-            tooltip: {
-                trigger: 'item'
-            },
-            legend: {
-                orient: 'vertical',
-                left: 'left'
-            },
-            series: [
-                {
-                    name: 'Access From',
-                    type: 'pie',
-                    radius: '60%',
-                    data: data
-                }
-            ]
-        };
-        const chart = echarts.init(null, null, {
-            renderer: 'svg',
-            ssr: true,
-            width: 300,
-            height: 350
-        });
-        chart.setOption(option);
-        const svgStr = chart.renderToSVGString();
-        response.send(svgStr);
-    });
-});
 //# sourceMappingURL=index.js.map
