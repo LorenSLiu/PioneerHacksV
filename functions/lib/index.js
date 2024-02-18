@@ -22,15 +22,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.pieChart = exports.decodeBarcodeFromImage = void 0;
 const functions = __importStar(require("firebase-functions"));
@@ -43,18 +34,16 @@ admin.initializeApp();
 //     img.src = 'data:image/png;base64,' + base64String;
 //     return img;
 // }
-function fetchData(barCode) {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log("begin fetchdata");
-        try {
-            const response = yield fetch('https://world.openfoodfacts.net/api/v2/product/' + barCode);
-            const document = response.json();
-            return document;
-        }
-        catch (error) {
-            console.error('Error:', error);
-        }
-    });
+async function fetchData(barCode) {
+    console.log("begin fetchdata");
+    try {
+        const response = await fetch('https://world.openfoodfacts.net/api/v2/product/' + barCode);
+        const document = response.json();
+        return document;
+    }
+    catch (error) {
+        console.error('Error:', error);
+    }
 }
 function removeEN(a) {
     let result = "";
@@ -109,11 +98,11 @@ function makeDataForChart(data) {
 //     console.log("huh")
 //     return result;
 // }
-exports.decodeBarcodeFromImage = functions.https.onRequest((request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    cors(request, response, () => __awaiter(void 0, void 0, void 0, function* () {
+exports.decodeBarcodeFromImage = functions.https.onRequest(async (request, response) => {
+    cors(request, response, async () => {
         //const base64Image = request.body.image;
         const number = request.query.number;
-        let itemRes = yield fetchData(number);
+        let itemRes = await fetchData(number);
         //let img = await fetchDataPic(number);
         console.log(itemRes);
         for (let i = 0; i < itemRes.product.ingredients_tags.length; i++) {
@@ -127,12 +116,12 @@ exports.decodeBarcodeFromImage = functions.https.onRequest((request, response) =
             //img : img
         };
         response.send(resdata);
-    }));
-}));
+    });
+});
 exports.pieChart = functions.https.onRequest((request, response) => {
-    cors(request, response, () => __awaiter(void 0, void 0, void 0, function* () {
+    cors(request, response, async () => {
         const number = request.query.number;
-        let itemResult = yield fetchData(number);
+        let itemResult = await fetchData(number);
         //let img = await fetchDataPic(number);
         console.log(itemResult);
         //
@@ -176,5 +165,6 @@ exports.pieChart = functions.https.onRequest((request, response) => {
         chart.setOption(option);
         const svgStr = chart.renderToSVGString();
         response.send(svgStr);
-    }));
+    });
 });
+//# sourceMappingURL=index.js.map

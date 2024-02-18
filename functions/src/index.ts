@@ -125,11 +125,11 @@ export const pieChart = functions.https.onRequest((request, response) => {
         console.log(typeof itemResult.product.ingredients[0]);
         let data = makeDataForChart(itemResult.product.ingredients)
         const option = {
-            title: {
-                text: 'nutrient content',
-                subtext: 'Hey',
-                left: 'right'
-            },
+            // title: {
+            //     text: 'nutrient content',
+            //     subtext: 'Hey',
+            //     left: 'right'
+            // },
             tooltip: {
                 trigger: 'item'
             },
@@ -141,7 +141,7 @@ export const pieChart = functions.https.onRequest((request, response) => {
                 {
                     name: 'Access From',
                     type: 'pie',
-                    radius: '50%',
+                    radius: '60%',
                     data: data
                 }
             ]
@@ -149,8 +149,8 @@ export const pieChart = functions.https.onRequest((request, response) => {
         const chart = echarts.init(null, null, {
             renderer: 'svg',
             ssr: true,
-            width: 600,
-            height: 600
+            width: 300,
+            height: 350
         });
 
 
