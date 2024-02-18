@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>NutriScan</title>
@@ -47,14 +48,9 @@
                     <input type="file" id="fileUpload" accept="image/png" capture="camera" name="image"
                            onchange="submitForm()">
                 </div>
-                <div class="inputText">
-                    <input type="text" id="barcode" name="barcode"
-
-                    >
+                <div class="inputText" >
+                    <input type="text" id="barcode" name="barcode" placeholder="Enter barcode here" style="width: 50%;  ">
                     <button type="submit" id="submit" onclick="submitBarcodeForm()">Submit</button>
-
-                    <canvas id="canvas" width="100%" height="100%"></canvas>
-                    <canvas id="canvas" width="100%" height="100%"></canvas>
                 </div>
             </form>
         </div>
@@ -63,7 +59,7 @@
     <div class="blacklist">
         <div>
             <svg width="9vh" height="9vh" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"
-                 style="justify-content: left;">
+                 style="justify-content: left; margin-top: -2vh;">
                 <path d="M12.5 56.25C12.2957 56.25 12.0945 56.1998 11.914 56.104C11.7336 56.0082 11.5794 55.8696 11.4649 55.7003C11.3504 55.5311 11.2792 55.3364 11.2574 55.1332C11.2356 54.93 11.264 54.7247 11.34 54.535L31.34 4.535C31.4633 4.22718 31.7039 3.98096 32.0087 3.85051C32.3136 3.72005 32.6578 3.71605 32.9656 3.83937C33.2734 3.9627 33.5197 4.20325 33.6501 4.50812C33.7806 4.81298 33.7846 5.15718 33.6613 5.465L13.6612 55.465C13.465 55.9525 12.995 56.25 12.4987 56.25H12.5Z"
                       fill="#A67C52"/>
                 <path d="M5 48.75C4.71075 48.7476 4.43125 48.6452 4.20896 48.4601C3.98666 48.275 3.83528 48.0187 3.7805 47.7347C3.72573 47.4507 3.77095 47.1565 3.90849 46.902C4.04602 46.6475 4.26739 46.4485 4.535 46.3388L54.535 26.3388C54.8411 26.2246 55.1796 26.2347 55.4784 26.3669C55.7771 26.499 56.0123 26.7428 56.1337 27.046C56.2552 27.3493 56.2532 27.688 56.1282 27.9898C56.0033 28.2916 55.7652 28.5326 55.465 28.6613L5.465 48.6613C5.31701 48.72 5.15922 48.7501 5 48.75Z"
@@ -107,6 +103,8 @@
     <div>
         <script>
             async function submitForm() {
+    
+                alert("Sorry, this feature broke down at the last minute. Please manually enter the barcode in the textbox beneath this instead.")
                 event.preventDefault();
                 var src = new Blob([URL.createObjectURL(document.getElementById('fileUpload').files[0])]);
                 var reader = new FileReader();
@@ -124,6 +122,7 @@
                         body: JSON.stringify({image: base64data}),
                     })
                 }
+                
             };
 
             function popUp() {

@@ -129,7 +129,7 @@ input[type="file"] {
 #sushiSVG {
     display: flex;
     margin-left: 5vw;
-
+    
 }
 
 #allergiesText {
@@ -213,6 +213,7 @@ input[type="file"] {
     font-size: 3vw;
     font-weight: 400;
     padding: 1%;
+
 }
 #close{
     position: absolute;
@@ -232,6 +233,10 @@ input[type="file"] {
     border-radius: 10px;
     border-style: solid;
 }
+#barcode::placeholder{
+    color: #2e431281;
+    font-size: 4vw;
+}
 #submit{
     height: 3vh;
     border-radius: 15px;
@@ -241,6 +246,7 @@ input[type="file"] {
     font-weight: 400;
     padding: 1%;
     margin: 0 0 10% 0;
+    margin-top: 5%;
 }
 #form{
     display: flex;
