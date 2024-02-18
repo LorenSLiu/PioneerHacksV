@@ -1,0 +1,33 @@
+[debug] [2024-02-18T05:50:58.373Z] ----------------------------------------------------------------------
+[debug] [2024-02-18T05:50:58.375Z] Command:       /Users/lorenliu/.nvm/versions/node/v18.18.2/bin/node /Users/lorenliu/.nvm/versions/node/v18.18.2/bin/firebase emulators:start
+[debug] [2024-02-18T05:50:58.375Z] CLI Version:   13.0.3
+[debug] [2024-02-18T05:50:58.375Z] Platform:      darwin
+[debug] [2024-02-18T05:50:58.375Z] Node Version:  v18.18.2
+[debug] [2024-02-18T05:50:58.377Z] Time:          Sat Feb 17 2024 21:50:58 GMT-0800 (Pacific Standard Time)
+[debug] [2024-02-18T05:50:58.377Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-18T05:50:58.443Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-18T05:50:58.443Z] > authorizing via signed-in user (lorensuyan@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2024-02-18T05:50:58.739Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-02-18T05:50:58.739Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2024-02-18T05:50:58.744Z] [hub] writing locator at /var/folders/6d/n_pj4rcj78g0t2zpdb6whgx80000gn/T/hub-pioneerhacksv.json
+[debug] [2024-02-18T05:50:58.932Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-02-18T05:50:58.933Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-02-18T05:50:58.933Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
+[debug] [2024-02-18T05:50:58.935Z] defaultcredentials: writing to file /Users/lorenliu/.config/firebase/lorensuyan_gmail_com_application_default_credentials.json
+[debug] [2024-02-18T05:50:58.940Z] Setting GAC to /Users/lorenliu/.config/firebase/lorensuyan_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/lorenliu/.config/firebase/lorensuyan_gmail_com_application_default_credentials.json"}}
+[debug] [2024-02-18T05:50:58.941Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pioneerhacksv/adminSdkConfig [none]
+[debug] [2024-02-18T05:50:59.656Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pioneerhacksv/adminSdkConfig 200
+[debug] [2024-02-18T05:50:59.657Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pioneerhacksv/adminSdkConfig {"projectId":"pioneerhacksv","storageBucket":"pioneerhacksv.appspot.com"}
+[debug] [2024-02-18T05:50:59.679Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-02-18T05:50:59.679Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-02-18T05:50:59.679Z] Starting Emulator UI with command {"binary":"node","args":["/Users/lorenliu/.cache/firebase/emulators/ui-v1.11.7/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/lorenliu/.cache/firebase/emulators/ui-v1.11.7/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2024-02-18T05:50:59.771Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2024-02-18T05:50:59.772Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "/Users/lorenliu/PioneerHacksV/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/lorenliu/PioneerHacksV/functions\" for Cloud Functions..."}}
+[debug] [2024-02-18T05:50:59.942Z] Validating nodejs source
