@@ -37,8 +37,8 @@
 
     <div class="banner">
       <p style="padding-bottom: 5%"> </p>
-    <p style="font-size: large; display: flex; color: #FFFFFF;  font-weight: bold; opacity: 0.9; margin-left: 5%;""> NutriScore </p>
-      <div id ="gradeContainer" style="margin-right: 70%;color: #FFFFFF;margin-left: 5%;""></div>
+    <p style="font-size: large; display: flex; color: #FFFFFF;  font-weight: bold; opacity: 0.9; margin-left: 5%;"> NutriScore </p>
+      <div id ="gradeContainer" style="margin-right: 70%;color: #FFFFFF;margin-left: 5%;"></div>
   <!-- <div class="stars-container">
     <span class="star">★</span>
     <span class="star">★</span>
@@ -49,10 +49,12 @@
 
     
     <p style="text-align: left; font-size: large; color: #FFFFFF; font-weight: bold; opacity: 0.9;margin-left: 5%;"> ECO Score </p>
-    <div id="ecoScoreContainer" style="align-content: left; margin-right: 70%; color: #FFFFFF; margin-left: 5%;"></div>
+    <div id="ecoScoreContainer" style="align-content: flex-start; margin-right: 70%; color: #FFFFFF; margin-left: 5%;"></div>
    
-    <p style="text-align: left; font-size: large; color: #FFFFFF; font-weight: bold; opacity: 0.9;margin-left: 5%;""> Ingredients</p>
-    <div id = "ingredientsContainer" style="align-content: left;margin-right: 10%;color: #FFFFFF;margin-left: 5%; padding-bottom: 50%"> </div>
+    <p style="text-align: left; font-size: large; color: #FFFFFF; font-weight: bold; opacity: 0.9;margin-left: 5%;"> Ingredients</p>
+    <div id = "ingredientsContainer" style="align-content: flex-start;margin-right: 10%;color: #FFFFFF;margin-left: 5%; padding-bottom: 50%">
+        <li></li>
+      </div>
 </div>
   <!-- RANKING -->
     <!-- <script>
@@ -72,13 +74,12 @@
         });
       } -->
 
-      
-    </script>
+    </div>
   <!-- RANKING -->
   <script>
     async function fetchPieChartSVG() {
         try {
-            const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/pieChart?number=5449000000996');
+            const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/pieChart?number=' + document.cookie.split("=")[1]);
             const svgContent = await response.text();
 
             // Create a temporary div to parse the SVG content
@@ -100,13 +101,13 @@
     }
 
     fetchPieChartSVG();
-</script>
 
-<script>
   async function fetchEcoScoreData() {
     try {
-      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=051500241639');
+      console.log(document.cookie.split("=")[1])
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=' + document.cookie.split("=")[1]);
       const ecoScoreData = await response.json();
+
 
       // Extract the ecoscore_grade property
       const ecoscoreGrade = ecoScoreData.ecoscore_grade;
@@ -126,20 +127,22 @@
     }
   }
 
-  // Call the fetchEcoScoreData function when the document is ready
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchEcoScoreData();
-  });
 </script>
 
 <script>
   async function fetchIngredients() {
     try {
-      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=051500241639');
-      const ingredientsData = await response.json();
 
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=' + document.cookie.split("=")[1]);
+      const ingredientsData = await response.json();
       // Extract the ingredients property
       const ingredients = ingredientsData.ingredients;
+      console.log(ingredients);
+      if (!ingredients) {
+        console.log("We searched high and low, but we couldn't find any ingredients for this product.");
+      } else {
+        console.log(ingredients);
+      }
 
       // Display the ingredients in a specific container
       const ingredientsContainer = document.getElementById('ingredientsContainer');
@@ -159,15 +162,19 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     fetchIngredients();
+    console.log("grabbing ingredients");
+    fetchGrade();
+    fetchEcoScoreData();
   });
-</script>
-
-<script>
   async function fetchGrade() {
     try {
-      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=051500241639');
+      const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/getIngredients?number=' + document.cookie.split("=")[1]);
       const gradeData = await response.json();
-
+      if (!gradeData) {
+        console.log("We searched high and low, but we couldn't find any grade for this product.");
+      } else {
+        console.log(gradeData);
+      }
       // Extract the grade property
       const grade = gradeData.grade;
 
@@ -187,9 +194,7 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchGrade();
-  });
+
 
   async function fetchDataFromServer() {
     // Make a GET request to your server
@@ -197,7 +202,11 @@
     try {
       const response = await fetch('https://us-central1-pioneerhacksv.cloudfunctions.net/GetData');
       const allergyData = await response.json();
-
+        if (!allergyData) {
+            console.log("We searched high and low, but we couldn't find any allergy for this product.");
+        } else {
+            console.log(allergyData);
+        }
       const allergy = allergyData._id;
       // Extract the ecoscore_grade property
 
@@ -219,7 +228,6 @@
 
 </script>
 
-    <div>
-  
+
   </body>
 </html>
